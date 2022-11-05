@@ -1,0 +1,36 @@
+{
+  "name": "gh-security",
+  "version": "1.0.0",
+  "description": "Outputs a table ranking Github Dependabot security vulnerability warnings",
+  "bin": {
+    "gh-security": "bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node ./",
+    "build": "rimraf ./bin && tsc && chmod +x ./bin/index.js"
+  },
+  "author": {
+    "name": "Jake Clements",
+    "email": "jakeclements@users.noreply.github.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/core": "^4.0.5",
+    "chalk": "^5.0.1",
+    "cli-table": "^0.3.11",
+    "commander": "^9.4.1",
+    "conf": "^10.2.0",
+    "loading-cli": "^1.1.0",
+    "multisort": "^0.5.3",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@octokit/types": "^7.5.1",
+    "@types/cli-table": "^0.3.1",
+    "@types/multisort": "^0.5.0",
+    "@types/node": "^18.7.23",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1"
+  }
+}
