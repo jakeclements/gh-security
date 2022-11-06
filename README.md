@@ -22,7 +22,7 @@ yarn global add gh-security
 
 ### Getting an Oktokit authentication token
 
-WIP
+Goto https://github.com/settings/tokens/new, the token requires all repo scopes to pull package security data.
 
 ## Contributing
 
