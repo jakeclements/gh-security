@@ -1,5 +1,5 @@
 {
-  "name": "gh-security",
+  "name": "@jakeclements/gh-security",
   "version": "0.0.0-development",
   "description": "Outputs a table ranking Github Dependabot security vulnerability warnings",
   "bin": {
