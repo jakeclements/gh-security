@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import { getRepoList, setRepoList, clearRepoList } from "./config";
-import { sendMessage } from "./messaging";
+import { sendMessage } from "./logging";
 
 export const repoListCommands = () => {
   const program = new Command();
@@ -28,7 +28,7 @@ export const repoListCommands = () => {
   repoProgram
     .command("clear")
     .description("Delete the stored repo list")
-    .action((str, options) => {
+    .action(() => {
       clearRepoList();
       sendMessage("Repo list deleted", "success");
     });

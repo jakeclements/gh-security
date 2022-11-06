@@ -5,7 +5,11 @@ const AUTHKEY = 'oktokitAuth';
 const REPOKEY = 'repositories';
 const OWNERKEY = 'owner';
 
-const config = new Conf({
+const config = new Conf<{
+  oktokitAuth: string | null;
+  owner: string | null;
+  repositories: any | never[];
+}>({
   defaults: {
     [AUTHKEY]: null,
     [OWNERKEY]: null,
@@ -27,6 +31,10 @@ export const getAuth = () => {
   return config.get(AUTHKEY);
 }
 
+export const getOwner = () => {
+  return config.get(OWNERKEY);
+}
+
 export const getRepoList = () => {
   return config.get(REPOKEY);
 }
@@ -38,7 +46,7 @@ export const setRepoList = (repoListPath: any) => {
   try {
     const rawdata = fs.readFileSync(repoListPath);
     let repoList = JSON.parse(rawdata.toString()); 
-    // @TODO: We should verify the schema here before setting config
+    // @TODO: We should verify the schema here before setting config - zod it up
     config.set(REPOKEY, repoList[REPOKEY]);
     config.set(OWNERKEY, repoList[OWNERKEY]);
     return true;

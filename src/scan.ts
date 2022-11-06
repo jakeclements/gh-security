@@ -1,14 +1,15 @@
 import { Command } from "commander";
-import { getAuth, getRepoList } from './config';
+import { getAuth, getRepoList, getOwner } from './config';
 import { Octokit } from "@octokit/core";
-import { sendMessage } from './messaging';
+import { sendMessage } from './logging';
 import { renderTable } from "./table";
+import { NO_TOKEN } from './messaging';
 
 const checkToken = () => {
   const auth = getAuth();
 
   if (!auth) {
-    sendMessage('Error: No Oktokit token set, read the README to learn how to generate and add one', 'error');
+    sendMessage(NO_TOKEN, 'error');
     return null;
   }
 
@@ -38,7 +39,7 @@ export const fetchIssuesForRepo = async ({ repo }: { repo: string }) => {
     const req = await octokit.request(
       "GET /repos/{owner}/{repo}/dependabot/alerts",
       {
-        owner: "opentable", //@TODO: Should come from config
+        owner: getOwner(),
         repo,
       }
     );
@@ -74,7 +75,6 @@ export const fetchIssuesForRepo = async ({ repo }: { repo: string }) => {
       critical: '-',
     };
   }
-
 };
 
 export const fetchRepoList = async () => {
@@ -82,14 +82,21 @@ export const fetchRepoList = async () => {
     return false;
   }
   const repoList = getRepoList();
-  const repoFetches = repoList.map((entry) => fetchIssuesForRepo(entry));
+  const repoFetches = repoList.map((entry: any) => fetchIssuesForRepo(entry));
   const repoData = await Promise.all(repoFetches);
 
-  console.log(repoData);
+  return repoData;
 }
 
-const viewRepoListTable = () => {
-  const repos = fetchRepoList();
+const viewRepoListTable = async () => {
+  const repos = await fetchRepoList();
+
+  if (repos) {
+    return renderTable(repos);
+  }
+
+  // @TODO: Better error
+  console.log('Error fetching data');
 }
 
 export const oktokitCommands = () => {

@@ -118,7 +118,4 @@ dist
 
 # Compiled code
 lib/
-
-# OT Specific ignores
-ot-repos.example.json
-import-microapps.ts
+bin/

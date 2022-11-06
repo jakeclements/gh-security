@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { getAuth, setAuth, deleteAuth } from "./config";
-import { sendMessage } from "./messaging";
+import { sendMessage } from "./logging";
+import { NO_TOKEN, TOKEN_STORED, TOKEN_REMOVED } from './messaging';
 
 export const authCommands = () => {
   const program = new Command();
@@ -19,7 +20,7 @@ export const authCommands = () => {
         sendMessage(oktoKitAuth);
       } else {
         sendMessage(
-          "Error: No Oktokit auth found, check the README to learn how to generate this",
+          NO_TOKEN,
           "error"
         );
       }
@@ -31,15 +32,24 @@ export const authCommands = () => {
     .argument("<string>", "Oktokit token")
     .action((str) => {
       setAuth(str);
-      sendMessage("Token stored");
+      sendMessage(TOKEN_STORED);
     });
 
   authProgram
     .command("delete")
     .description("Delete the stored Oktokit auth token")
     .action(() => {
-      deleteAuth();
-      sendMessage("Token deleted");
+      const oktoKitAuth = getAuth();
+
+      if (oktoKitAuth) {
+        deleteAuth();
+        sendMessage(TOKEN_REMOVED);
+      } else {
+        sendMessage(
+          NO_TOKEN,
+          "error"
+        );
+      }
     });
 
   return authProgram;

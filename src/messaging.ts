@@ -1,14 +1,3 @@
-// import chalk from 'chalk';
-
-const messagingTypes = {
-  default: 'default',
-  success: 'success',
-  error: 'error',
- } as const;
-
-type MessageTypes = (typeof messagingTypes)[keyof typeof messagingTypes]
-
-export const sendMessage = (message: string | any, type: MessageTypes = 'default') => {
-  // @TODO: Setup Chalk and debugging
-  console.log(message);
-}
+export const NO_TOKEN = 'Error: No Oktokit token set, check the README to learn how to generate and add one';
+export const TOKEN_STORED = 'Token stored';
+export const TOKEN_REMOVED = 'Token removed';
