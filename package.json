@@ -1,5 +1,5 @@
 {
-  "name": "@jakeclements/gh-security",
+  "name": "gh-security",
   "version": "0.0.0-development",
   "description": "Outputs a table ranking Github Dependabot security vulnerability warnings",
   "bin": {
@@ -42,6 +42,6 @@
     "url": "https://github.com/jakeclements/gh-security.git"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   }
 }
