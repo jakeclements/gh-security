@@ -1,6 +1,6 @@
 {
   "name": "gh-security",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "Outputs a table ranking Github Dependabot security vulnerability warnings",
   "bin": {
     "gh-security": "bin/index.js"
@@ -8,7 +8,8 @@
   "scripts": {
     "test": "jest",
     "start": "ts-node ./",
-    "build": "rimraf ./bin && tsc && chmod +x ./bin/index.js"
+    "build": "rimraf ./bin && tsc && chmod +x ./bin/index.js",
+    "semantic-release": "semantic-release"
   },
   "author": {
     "name": "Jake Clements",
@@ -33,6 +34,14 @@
     "@types/node": "^18.7.23",
     "jest": "^29.2.2",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "semantic-release": "^19.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakeclements/gh-security.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }
