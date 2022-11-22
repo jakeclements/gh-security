@@ -36,9 +36,9 @@ You'll need to provide an Oktokit auth token before you can scan repos. This req
 Goto https://github.com/settings/tokens/new?scopes=repo, gh-security requires "all repo" scopes to pull package security data. Token expiration is up to you, if a token expires you can regenerate and add a new one by repeating these steps.
 
 **Adding the token to gh-security**
-Run `npx auth set [your-token]` replacing `[your-token]` with the token you generated above to set the token. This token persists across installs of the app.
+Run `npx gh-security auth set [your-token]` replacing `[your-token]` with the token you generated above to set the token. This token persists across installs of the app.
 
-Run `npx auth view` to verify your authorisation token has been added, if successful you should see your token.
+Run `npx gh-security auth view` to verify your authorisation token has been added, if successful you should see your token.
 
 ### Adding repositories to scan
 
@@ -51,7 +51,7 @@ Repositories to scan are based on an imported file with the following shape;
     {
       "repo": "my-favourite-repo"
     },
-    {
+    {g
       "repo": "my-almost-favourite-repo"
     },
     {
@@ -64,7 +64,7 @@ Repositories to scan are based on an imported file with the following shape;
 All repos to be scanned should belong to a single owner, represented by the `owner` key.
 Order doesn't matter, repos in the table will be sorted based on their security issues.
 
-Once you've added a couple of repositories to your json, save it and run `npx gh-security auth set ./path-to-file.json` to import your repo list.
+Once you've added a couple of repositories to your json, save it and run `npx gh-security repo-list set ./path-to-file.json` to import your repo list.
 
 Run `npx gh-security repo-list view` to verify the repo list has been uploaded, if successful you should see the list you uploaded.
 
